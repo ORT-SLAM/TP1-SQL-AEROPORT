@@ -10,8 +10,7 @@ FROM personnel p
 JOIN programmervol pr ON pr.numPers = p.idPers
 JOIN vol v ON v.idVol = pr.numVol
 JOIN avion a ON a.num = v.numAvion
-JOIN typeavion ta ON ta.nom = a.nomTypeAvion
-WHERE ta.nom = 'Boeing 767'
+WHERE a.nomTypeAvion = 'Boeing 767'
   AND v.dateVol >= '2017-10-01'
   AND v.dateVol <  '2017-11-01';
 ```
