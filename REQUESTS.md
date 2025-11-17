@@ -21,8 +21,7 @@ WHERE a.nomTypeAvion = 'Boeing 767'
 SELECT p.idPers, p.nom FROM personnel p
 JOIN typepersonnel tp ON p.idType = tp.idTypePersonnel
 JOIN programmervol pv ON p.idPers = pv.numPers
-JOIN vol v ON v.idVol = pv.numVol
-WHERE v.idVol = 6 AND tp.nomTypePersonnel = "Steward"
+WHERE pv.numVol = 6 AND tp.nomTypePersonnel = "Steward"
 ```
 
 3. Combien de vols ont été réalisés au départ de Nantes par un Boeing 747 d’une capacité comprise entre 250 et 300.
