@@ -49,7 +49,13 @@ ORDER BY nombreVols DESC;
 5. Quels sont les avions (numéro + nom du type + localisation) qui sont localisés dans la même ville que l’avion n°16.
 
 ```sql
-SELECT a.num, ta.nom, a.localisation FROM avion a JOIN typeavion ta ON a.nomTypeAvion = ta.nom WHERE a.localisation = (SELECT a.localisation FROM avion a WHERE a.num = 16);
+SELECT a.num, ta.nom, a.localisation
+FROM avion a
+JOIN typeavion ta ON a.nomTypeAvion = ta.nom
+WHERE a.localisation = (
+    SELECT localisation FROM avion WHERE num = 16
+)
+AND a.num != 16;
 ```
 
 6. Quelles sont les personnes (nom) qui n’ont jamais été programmées sur un Airbus A320.
