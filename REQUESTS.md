@@ -27,7 +27,11 @@ WHERE pv.numVol = 6 AND tp.nomTypePersonnel = "Steward"
 3. Combien de vols ont été réalisés au départ de Nantes par un Boeing 747 d’une capacité comprise entre 250 et 300.
 
 ```sql
-SELECT count(*) FROM vol v JOIN avion a ON a.num = v.numAvion JOIN typeavion ta ON a.nomTypeAvion = ta.nom WHERE v.villeDep = "Nantes" AND ta.capacite BETWEEN 250 AND 300 AND ta.nom = "Boeing 747";
+SELECT count(*) FROM vol v
+JOIN avion a ON a.num = v.numAvion
+JOIN typeavion ta ON a.nomTypeAvion = ta.nom
+WHERE v.villeDep = "Nantes"
+AND ta.capacite BETWEEN 250 AND 300 AND ta.nom = "Boeing 747";
 ```
 
 4. Quels sont les types d’avions (nom du type + nombre de vols) ayant réalisé plus de 5 vols. Cette liste sera triée par ordre décroissant sur le nombre de vols.
