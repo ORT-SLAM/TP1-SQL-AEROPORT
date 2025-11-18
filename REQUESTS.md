@@ -37,7 +37,7 @@ AND ta.capacite BETWEEN 250 AND 300 AND ta.nom = "Boeing 747";
 4. Quels sont les types d’avions (nom du type + nombre de vols) ayant réalisé plus de 5 vols. Cette liste sera triée par ordre décroissant sur le nombre de vols.
 
 ```sql
-SELECT 
+SELECT
     a.nomTypeAvion AS typeAvion,
     COUNT(v.idVol) AS nombreVols
 FROM avion a
@@ -64,7 +64,7 @@ AND a.num != 16;
 SELECT p.nom
 FROM personnel p
 WHERE p.idPers NOT IN (
-    SELECT pv.numPers
+    SELECT DISTINC pv.numPers
     FROM programmervol pv
     JOIN vol v ON v.idVol = pv.numVol
     JOIN avion a ON a.num = v.numAvion
