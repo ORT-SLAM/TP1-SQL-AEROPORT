@@ -38,12 +38,11 @@ AND ta.capacite BETWEEN 250 AND 300 AND ta.nom = "Boeing 747";
 
 ```sql
 SELECT 
-    ta.nom AS typeAvion,
+    a.nomTypeAvion AS typeAvion,
     COUNT(v.idVol) AS nombreVols
-FROM typeavion ta
-JOIN avion a ON a.nomTypeAvion = ta.nom
+FROM avion a
 JOIN vol v ON v.numAvion = a.num
-GROUP BY ta.nom
+GROUP BY a.nomTypeAvion
 HAVING COUNT(v.idVol) > 5
 ORDER BY nombreVols DESC;
 ```
@@ -51,9 +50,8 @@ ORDER BY nombreVols DESC;
 5. Quels sont les avions (numéro + nom du type + localisation) qui sont localisés dans la même ville que l’avion n°16.
 
 ```sql
-SELECT a.num, ta.nom, a.localisation
+SELECT a.num, a.nomTypeAvion, a.localisation
 FROM avion a
-JOIN typeavion ta ON a.nomTypeAvion = ta.nom
 WHERE a.localisation = (
     SELECT localisation FROM avion WHERE num = 16
 )
@@ -70,8 +68,7 @@ WHERE p.idPers NOT IN (
     FROM programmervol pv
     JOIN vol v ON v.idVol = pv.numVol
     JOIN avion a ON a.num = v.numAvion
-    JOIN typeavion ta ON ta.nom = a.nomTypeAvion
-    WHERE ta.nom = 'Airbus A320'
+    WHERE a.nomTypeAvion = 'Airbus A320'
 );
 ```
 
@@ -86,19 +83,17 @@ GROUP BY tp.nomTypePersonnel
 8. Quel est le nom du type d’avion qui a réalisé le plus de vols.
 
 ```sql
-SELECT ta.nom
-FROM typeavion ta
-JOIN avion a ON a.nomTypeAvion = ta.nom
+SELECT a.nomTypeAvion
+FROM avion a
 JOIN vol v ON v.numAvion = a.num
-GROUP BY ta.nom
+GROUP BY a.nomTypeAvion
 HAVING COUNT(v.idVol) = (
     SELECT MAX(nbVols)
     FROM (
         SELECT COUNT(v2.idVol) AS nbVols
-        FROM typeavion ta2
-        JOIN avion a2 ON a2.nomTypeAvion = ta2.nom
+        FROM avion a2
         JOIN vol v2 ON v2.numAvion = a2.num
-        GROUP BY ta2.nom
+        GROUP BY a2.nomTypeAvion
     ) AS temp
 );
 ```
